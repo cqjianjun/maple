@@ -2,7 +2,7 @@
 
 #  Maple J2EE快速开发框架(MyBatis)
 
-Hibernate版本请前往：http://git.oschina.net/blind/app
+Hibernate版请前往：http://git.oschina.net/blind/app
 
 ## 项目简介
 
