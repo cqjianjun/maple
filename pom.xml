@@ -227,6 +227,12 @@
             </dependency>
             <!-- druid end-->
 
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus</artifactId>
+                <version>${mybatis.plus.version}</version>
+            </dependency>
+
             <!-- log begin -->
             <dependency>
                 <groupId>log4j</groupId>
@@ -416,14 +422,6 @@
                 <version>${weixin.sdk.version}</version>
             </dependency>
             <!-- weixin-sdk end -->
-
-            <!-- mybatis-plus begin -->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>${mybatis.plus.version}</version>
-            </dependency>
-            <!-- mybatis-plus end -->
 
             <!--ehcache begin-->
             <dependency>

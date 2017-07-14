@@ -78,19 +78,11 @@
         </dependency>
         <!-- servlet/jsp/jstl/taglibs for web end-->
 
-        <!-- freemarker begin-->
         <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis.plus.version}</version>
         </dependency>
-        <!-- freemarker end-->
-
-        <!-- mybatis-plus begin -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-        </dependency>
-        <!-- mybatis-plus end -->
 
         <!--ehcache begin-->
         <dependency>

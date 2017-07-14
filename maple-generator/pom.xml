@@ -12,14 +12,6 @@
     <artifactId>maple-generator</artifactId>
 
     <dependencies>
-        <!-- mybatis-plus begin -->
-        <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus</artifactId>
-                <version>${mybatis.plus.version}</version>
-        </dependency>
-        <!-- mybatis-plus end -->
-
         <!-- velocity begin-->
         <dependency>
             <groupId>org.apache.velocity</groupId>
@@ -35,6 +27,12 @@
             <version>${mysql.driver.version}</version>
         </dependency>
         <!-- mysql driver end-->
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+            <version>${mybatis.plus.version}</version>
+        </dependency>
     </dependencies>
 
 </project>
