@@ -2,15 +2,13 @@
 
 ## 项目简介
 
+
 - 使用Maven对项目进行模块化管理，提高项目的易开发性、扩展性。
 - 实现了通用的系统管理模块功能，包含：用户、角色、权限、菜单、字典管理。
 - 实现了基于AOP解耦的日志模块。
 - 实现了通用的异常处理和响应模型、错误码标准规范。（非restful）
 - 实现了基于JWT和Redis的Token认证。
-- 实现了支持根据参数动态构建复杂SQL语句的构建器，基于freemarker。
 - 颜值还可以的后台UI界面。
-
-app意思是应用程序Application，开发时替换成你自己的项目名
 
 欢迎进群交流
 
@@ -19,56 +17,55 @@ app意思是应用程序Application，开发时替换成你自己的项目名
 
 
 ## 模块说明
-- app-admin         后台管理界面模块
-- app-api           开放给移动端或其他终端的接口模块
-- app-auth          基于Redis的身份认证模块
-- app-base          基础模块，包含底层DAO、Service等的封装
-- app-file          简单的文件服务模块，使用FTP服务器上传和下载
-- app-generator     代码生成器
-- app-log           通用日志模块
-- app-system        通用的系统管理模块
-- app-utils         一些通用的工具类
+- maple-admin         后台管理界面模块
+- maple-api           开放给移动端或其他终端的接口模块
+- maple-auth          基于Token和Redis的身份认证模块
+- maple-base          基础模块，包含底层DAO、Service等的封装
+- maple-file          简单的文件服务模块，使用FTP服务器上传和下载
+- maple-generator     代码生成器
+- maple-log           通用日志模块
+- maple-system        通用的系统管理模块
+- maple-utils         一些通用的工具类
 
 ## 技术选型
 - 核心框架：Spring Framework 4.3.6
 - 安全框架：Apache Shiro 1.3.2
-- 持久层框架：Hibernate 5.2.6.Final
+- 持久层框架：Mybatis（mybatis-plus）
 - 数据库连接池：Alibaba Druid 1.0.29
 - Token生成和管理：JWT、Redis
-- 日志管理：SLF4J、Log4j2
+- 日志管理：Log4j
 - 数据库：MySQL
 - 后台前端框架：Jquery EasyUI 1.5.X 和 JQuery EasyUI 1.5.x of Insdep Theme 
 
 ## 使用说明
 
 ### 1. 启动说明
-
+    * 项目路径：http://localhost:8080/maple/admin/index
+    
     * 后台帐号密码：admin  123456
 
-    * 项目依赖Redis服务，请先安装Redis客户端。
+    * 项目maple-api模块依赖Redis服务，请先安装Redis客户端，不需要api模块可不用。
     
     * 项目有2个war包模块，请使用不同的端口运行启动。
-        app-admin：是后台管理界面
-        app-api：是api模块，实现了基于jwt和redis的token认证。一般应用于前后端分离的项目，如Android、IOS等客户终端调用的接口都来源于此模块，使用token进行身份认证。
+        maple-admin：是后台管理界面
+        maple-api：是api模块，实现了基于jwt和redis的token认证。一般应用于前后端分离的项目，如Android、IOS等客户终端调用的接口都来源于此模块，使用token进行身份认证。
         
     * 数据库：
-        运行前请先创建数据库，数据库名：app-xxx（xxx表示不同环境）
-        项目使用了Hibernate注解映射，会自动生成表结构
-        项目启动后，导入SQL文件（app-admin模块sql文件夹下app-dev.sql）进行导入数据。
+        运行前请先创建数据库，数据库名：maple
+        导入SQL文件（maple.sql）进行导入数据后启动项目。
         
     * 环境配置/打包：
-    	 app-admin 和 app-api 模块下都包含4套环境配置，不同的环境请自行修改里面的参数。
+    	 maple-admin 和 maple-api 模块下都包含3套环境配置，不同的环境请自行修改里面的参数。
     	 说明：
-    	 local - 本地环境
     	 dev - 开发环境
     	 test - 测试环境
     	 pro - 生成环境
     	 
-    	 使用maven打包时，可以选择不同的环境配置文件
+    	 使用maven打包时，可以选择不同的环境配置文件，配置文件在打包（war）时起作用，本地开发时只需要修改最外层的配置文件
     	 
     
 ### 2. 基于Redis的身份认证模块使用说明
-依赖app-auth模块，也可将该模块可以单独打成jar包再引用
+依赖maple-auth模块，也可将该模块可以单独打成jar包再引用
 
 使用Redis存储Token，在需要集成身份认证的项目的spring-mvc.xml文件中配置：
 
@@ -212,7 +209,7 @@ single.token.with.user = false
 token.expire.seconds = 3600
 ```
 
-配置具体参考app-api模块中，spring-mvc.xml的配置
+配置具体参考maple-api模块中，spring-mvc.xml的配置
 
 使用如下：
 需要身份验证的方法加上@Authorization注解即可，也可以直接在Controller类上加上该注解，这将会使该Controller中的所有方法都需要进行身份验证。
@@ -232,7 +229,7 @@ token.expire.seconds = 3600
 鉴权失败，会统一返回401  HTTP状态码，注意这里是http状态码，也可以在配置文件自定义鉴权失败的http状态码，默认为401（unauthorized）。
 
 ### 3. 通用日志模块
-依赖app-log模块，也可将该模块可以单独打成jar包再引用
+依赖maple-log模块，也可将该模块可以单独打成jar包再引用
 
 在spring-context.xml中添加配置
 
@@ -254,108 +251,16 @@ token.expire.seconds = 3600
 
 SystemLogService实现了LogPoint类中的save方法，在该方法中实现日志的存储
 
-具体参考app-system模块中SystemLogService.java
+具体参考maple-system模块中SystemLogService.java
 
-### 4. 复杂SQL构建器使用
-我为什么做了这个东西？
-因为ORM框架使用了Hibernate框架，而Hibernate对于复杂的自定义的SQL的支持力度不够，或许是我不太会使用Hibernate。
-在有些时候有些业务逻辑有些复杂的查询需要连接很多张表，比如统计，并且是要根据参数来动态构建的。这个时候并没有没有任何一个实体类可以与这个结果集进行映射和匹配。以往我们都是自己在dao的Java类中使用String进行动态拼接，这样我觉得写起来很恶心，而且可读性很差，所以就有了这个构建器。
-很简单的东西，基于freemarker，这里我并没有考虑查询的性能。
+### 4. 集成了Mybatis-plus
 
-示例：按模块来统计日志记录的数据量，若参数中有模块名则添加条件没有则统计所有
-先在项目的sql文件夹下建一个select-test.sql文件，里面是查询语句
-```
-<#assign data = params?eval>
-
-select module, count(*) as count
-from sys_log
-
-<#if data.module??>
- where module =:module
-</#if>
-
-group by module order by count
-```
-可以看到我用了freemarker的判断语法，以及assign 语法， <#assign data = params?eval> 中的params名称是固定的。
-
-然后在dao里面添加方法
-```
-/**
-     * 测试SQLBuilder 的使用
-     * 原理：使用freemarker模板定义要执行的sql文件，支持动态参数逻辑判断，构建SQL语句
-     * @param module
-     * @return
-     */
-    @Override
-    public List<TestCount> findTest(String module) {
-        try {
-            Map params = new HashMap<>();
-            params.put("module", module);
-
-            String json = JSON.toJSONString(params);
-
-            String sql = SqlBuilder.buildSql(SqlConfig.getSqlPath("select-test"), json);
-
-            NativeQuery query = getSession().createNativeQuery(sql);
-            query.setResultTransformer(new BeanTransformerAdapter<>(TestCount.class));
-            setParameters(query, params);
-
-            List<TestCount> result = query.list();
-
-            return result;
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (TemplateException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-```
-
-BeanTransformerAdapter是对Hibernate返回的结果集的映射转换器。
+Mybatis-plus的使用请参考：
+https://git.oschina.net/baomidou/mybatis-plus
 
 ### 5. 代码生成器的使用
-app-generator模块是个独立模块，也可将该模块可以单独打成jar包再引用
-这个代码生成器比较简单，只针对该项目的结构，支持自定义其他模板，自行添加，修改代码即可
-
-生成代码运行：io.zhijian.generator.core.generator.Run 类即可
-
-生成代码之前需要配置config.properties文件
-```
-
-###配置生成器参数
-
-#模板所在目录
-template.path = E:\\Workspace\\J2EE\\app\\app-generator\\src\\main\\resources\\template
-
-#代码生成输出目录
-output.path = E:\\Workspace\\TestGenerator
-
-#数据库实体类所在目录
-input.path = E:\\Workspace\\J2EE\\app\\app-system\\src\\main\\java\\io\\zhijian\\system\\entity
-
-#项目模块包根路径
-base.package = io.zhijian.system
-
-#dao生成的包路径
-dao.package = io.zhijian.system.dao
-
-#service生成的包路径
-service.package = io.zhijian.system.service
-
-#controller生成的包路径
-controller.package = io.zhijian.controller.sys
-
-#model生成的包路径、包含request、response（VO、DTO）
-model.package = io.zhijian.system.model
-
-#主键类型
-pk.type = Integer
-
-```
-配置有详细的注释说明，代码也很简单，原理是根据数据实体类和模板文件生成各个模块的代码，所以生成代码之前必须要先有数据库实体类，没有做读取数据库然后生成的逻辑，那些太麻烦，有兴趣可以自己做。
-
-然后是模板文件，在resource/template 目录下，可以自行添加和修改。
+maple-generator模块，使用mybatis-plus的代码生成器
+使用请参考：https://git.oschina.net/baomidou/mybatis-plus
 
 ### 6. 统一异常处理、响应结果、状态码的约定
 - 统一的响应结果
@@ -448,6 +353,11 @@ body = 实际响应内容，有错误或异常时为null
 @ScienJus
 项目基于Redis的认证模块修改和集成了此项目
 https://github.com/ScienJus/spring-authorization-manager
+
+@baomidou
+
+mybatis 增强工具包，简化 CRUD 操作
+https://git.oschina.net/baomidou/mybatis-plus
 
 Jquery EasyUI Insdep主题
 https://www.insdep.com
