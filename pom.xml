@@ -443,7 +443,7 @@
     <!--environment begin-->
     <profiles>
         <!-- 本地 -->
-        <profile>
+        <!--<profile>
             <id>local</id>
             <properties>
                 <package.environment>local</package.environment>
@@ -451,7 +451,8 @@
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
-        </profile>
+        </profile>-->
+
         <!-- 开发 -->
         <profile>
             <id>dev</id>
