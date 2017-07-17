@@ -47,7 +47,7 @@
     <span class="systemlogo"></span>
     <div class="loginbox loginbox1">
         <ul>
-            <li><input id="username" name="" type="text" class="loginuser" placeholder="admin"/></li>
+            <li><input id="username" name="" type="text" class="loginuser" placeholder="帐号"/></li>
             <li><input id="password" name="" type="password" class="loginpwd" placeholder="密码"/></li>
             <li class="yzm">
                 <span><input id="captcha" type="text" placeholder="验证码"/></span>

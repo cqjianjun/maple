@@ -41,6 +41,11 @@ Hibernate版请前往：http://git.oschina.net/blind/app
 - 数据库：MySQL
 - 后台前端框架：Jquery EasyUI 1.5.X 和 JQuery EasyUI 1.5.x of Insdep Theme 
 
+## 环境要求
+- 环境配置：Maven3.X + JDK1.8 + Tomcat7/8（非插件） 
+- 开发工具：idea 2016.3.1
+Eclipse或MyEclipse可以导入，有问题自己调试一下，推荐使用idea
+
 ## 使用说明
 
 ### 1. 启动说明
