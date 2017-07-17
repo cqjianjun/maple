@@ -44,7 +44,7 @@ Hibernate版请前往：http://git.oschina.net/blind/app
 ## 环境要求
 - 环境配置：Maven3.X + JDK1.8 + Tomcat7/8（非插件） 
 - 开发工具：idea 2016.3.1
-Eclipse或MyEclipse可以导入，有问题自己调试一下，推荐使用idea
+- Eclipse或MyEclipse可以导入，有问题自己调试一下，推荐使用idea
 
 ## 使用说明
 
