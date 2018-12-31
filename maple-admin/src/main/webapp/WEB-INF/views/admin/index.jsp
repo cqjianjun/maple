@@ -217,7 +217,7 @@
                                         data-options="border:false,fit:true, onClickRow:function(index,row){ztab.open(row.text,row.value)}">
                                         <c:forEach var="childMenu" items="${menus}">
                                             <c:if test='${childMenu.parentId==menu.id}'>
-                                                <li value="${ctx}/${childMenu.url}">${childMenu.name}</li>
+                                                <li value="${ctx}${childMenu.url}">${childMenu.name}</li>
                                             </c:if>
                                         </c:forEach>
                                     </ul>
